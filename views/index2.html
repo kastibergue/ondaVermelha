@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Enquete</title>
+<style>
+  /* Estilos gerais */
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .image-list{
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
+    background-color: white;
+	}
+  /* Estilos para a lista de imagens */
+  .imagens {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .imagem {
+    width: 100%;
+    height: auto;
+    border-radius: 5px solid red;
+    box-shadow: 0 0 00px 20px red;
+    overflow: hidden;
+  }
+  /* Estilos para a borda vermelha */
+  .imagem::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: red;
+    opacity: 6;
+  }
+</style>
+</head>
+<body>
+  <h1>Qual desses é o melhor para Angicos?</h1>
+
+  <form action="/montage" method="post">
+    <div class="form-group image-list">
+	
+      <label for="image1">Imagem 1</label>
+      
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Gerar montagem</button>
+  </form>
+    <script>
+const div_mage = document.querySelector(".form-group");
+
+const images = [
+	{
+	  id: 0,
+	  name: 'c1.png',
+	},{
+	  id: 1,
+	  name: 'c2.png',
+	},{
+	  id: 2,
+	  name: 'c3.png',
+	},{
+	  id: 3,
+	  name: 'c4.png',
+	},{
+	  id: 4,
+	  name: 'c5.png',
+	},{
+	  id: 5,
+	  name: 'c6.png',
+	},{
+	  id: 6,
+	  name: 'c3.png',
+	},{
+	  id: 7,
+	  name: 'c4.png',
+	},{
+	  id: 8,
+	  name: 'c5.png',
+	},{
+	  id: 9,
+	  name: 'c6.png',
+	},
+];
+
+images.forEach((item) => {
+	const p = document.createElement('p');
+	const img = document.createElement('img');
+	img.src = '../images/'+ item.name;
+		img.width = 200;
+		img.height = 200;
+
+	p.appendChild(img);
+	div_mage.appendChild(p);
+  });
+  </script>
+</body>
+</html>

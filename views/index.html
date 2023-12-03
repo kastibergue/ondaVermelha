@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
+  <title>Enquete</title>
+  <script  type="module">
+  </script>
+  <style>
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+#dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(233, 80, 80, 0.5);
+  z-index: 1000;
+}
+  /* Esquema de layout para celular */
+@media (max-width: 899px) {
+#titulo {
+	padding : 0 0 0 4%;
+
+}
+#form {
+	padding : 0 0 0 4%;
+
+}
+#dialog button {
+	width:45%;
+	}
+#dialog .conteudo {
+  left: 40%;
+  width: 85%;
+  margin-left: 7%;
+  }
+  #dialog .conteudo p {
+ margin-left: 9%;
+ margin-right: 2%
+}
+#dialog p .dialogTelefone {
+  margin: 0 0 20px 0;
+  padding: 0;
+  font-size: 16px;
+  padding-left: 10%;
+}
+.textoDialog p .btns{
+	background-color: #d57f7f;
+	height : 70%;
+}
+.dialogIage img{
+	width: 70%; 
+	border-radius: 15px;
+	padding-left:8%
+}
+.imagem img{
+	width: 100%;
+}
+.col-1 {
+    width: 10%;
+  }
+  .col-2 {
+    width: 80%;
+  }
+.col-3 {
+    width: 10%;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Esquema de layout para computador */
+@media  (min-width:900px) {
+.dialogIage img{
+	background-color: white;
+	width: 50%; 
+	border-radius: 15px;
+	padding-left:12%
+}
+.dialogtitulo{
+}
+.dialogIage{
+box-shadow: 0 0 10px 2px red;
+}
+#dialog {
+  position: fixed;
+  top: 0;
+  left: 15%;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(233, 80, 80, 0.5);
+  z-index: 1000;
+}
+.colhead{
+
+} 
+.colcontainer{
+column-count:2;
+}
+
+#dialog .conteudo {
+  left: 40%;
+    width: 400px;
+	margin-left: 40%;
+	box-shadow: 0 0 10px 2px red;
+	border-radius : 15px;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .col-1 {
+    width: 35%;
+  }
+  .col-2 {
+    width: 50%;
+  }
+.col-3 {
+    width: 15%;
+  }
+
+/* Styles for the image list */
+.imagem img {
+  width: 100%;
+  margin: 0 auto;
+
+}
+
+/* Styles for image container */
+.imagem-container {
+  flex: 1 0 50%; /* Sets the width of each image container to 50% */
+  margin: 10px;
+}
+
+/* Styles for image */
+.imagem {
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px red;
+  overflow: hidden;
+  margin-bottom:10%;
+}
+
+}
+
+
+#dialog h2 {
+  margin: 0 0 0 0;
+  padding: 4% 0 0 2%;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#dialog p .dialogTelefone {
+  margin: 0 0 20px 0;
+  padding: 0;
+  font-size: 16px;
+  padding-left: 20%;
+}
+.textoDialog {
+	
+	height : 70%;
+}
+
+#dialog button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+#dialog .conteudo {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  
+}
+#ddd {
+	max-width: 5%;
+}
+#fone {
+	max-width: 40%;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="col-1"></div>
+<div class="col-2">
+<div class="colhead">
+  <h1>Qual desses é o melhor para Angicos?</h1>
+</div>  
+<div class="colcontainer">
+	<div class="imagens"></div>
+</div>
+</div>
+  <div class="col-3"></div>
+  <div id="dialog">
+  <div class="textoDialog">
+
+  <p class="dialogIage"></p>
+  
+  <p class="dialogTelefone"></p>
+<div class="conteudo">
+  <div class="dialogtitulo">
+  <h2>Confirmação</h2>
+  <p id="titulo">
+  Seu voto será nessa chapa?
+  </p>
+  </div>
+	<p>Digite seu celular e caso você participe do grupo "Onda Vermelha" você receberá um código.</p> 
+	</br>
+	<div id="form">
+	<span>DDD:(<input maxlength="2" size="4" type="number" id="ddd">)</span>
+	<span>Fone: 9<input maxlength="2"  type="number" size="25"  id="fone"></span>
+	</div>
+	<p class="btns"> 
+  <button id="sim">Sim</button>
+  <button id="nao">Não</button>
+  </p>
+  </div>
+    </div>
+</div>
+
+    <script  type="module">
+
+const div_mage = document.querySelector(".imagens");
+document.getElementById("dialog").style.display = "none";
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
+let images = [
+	{
+	  id: 0,
+	  name: 'c1.png',
+	},{
+	  id: 1,
+	  name: 'c2.png',
+	},{
+	  id: 2,
+	  name: 'c3.png',
+	},{
+	  id: 3,
+	  name: 'c4.png',
+	},{
+	  id: 4,
+	  name: 'c5.png',
+	},{
+	  id: 5,
+	  name: 'c6.png',
+	},{
+	  id: 6,
+	  name: 'c7.png',
+	},{
+	  id: 7,
+	  name: 'c8.png',
+	},{
+	  id: 8,
+	  name: 'c9.png',
+	},{
+	  id: 9,
+	  name: 'c10.png',
+	},
+];
+
+images = shuffle(images);
+
+images.forEach((item) => {
+	const div = document.createElement('div');
+	div.setAttribute("class", "imagem-container");
+
+	const img = document.createElement('img');
+	img.src = '../images/'+ item.name;
+	img.setAttribute("id", item.id);
+	img.onclick = function() {
+		abrirDialog(item.id);
+	};
+	div.setAttribute("class", "imagem");
+
+	div.appendChild(img);
+	div_mage.appendChild(div);
+  });
+  
+function abrirDialog(id) {
+	
+	const idImage = returnId(id);
+	
+  // Obtém o elemento do diálogo
+	const dialog = document.getElementById("dialog");
+	let  div_image = document.querySelector(".dialogIage");
+	div_image.innerHTML  = '';
+	const img = document.createElement('img');
+	img.src = '../images/'+ idImage.name;
+	//img.onclick = function() {
+	//	abrirDialog(idImage);
+	//};
+	
+	div_image.appendChild(img);
+	
+  // Mostra o diálogo
+  dialog.style.display = "block";
+  
+  
+  
+}
+
+function returnId(id){
+	var image;
+	images.forEach((item) => {
+		if(item.id == id){
+			image = item;
+		}
+	});
+	
+	return image;
+}
+
+document.getElementById("sim").onclick = function() {
+  // Fecha o diálogo
+  document.getElementById("dialog").style.display = "none";
+
+  // Faz alguma coisa ao clicar em "Sim"
+};
+
+document.getElementById("nao").onclick = function() {
+  // Fecha o diálogo
+  document.getElementById("dialog").style.display = "none";
+
+  // Faz alguma coisa ao clicar em "Não"
+};
+  </script>
+</body>
+</html>
